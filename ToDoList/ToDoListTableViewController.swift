@@ -9,9 +9,8 @@ import UIKit
 
 class ToDoListTableViewController: UITableViewController, ToDoCellDelegate {
 
-    
-    
     var toDos = [ToDo]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,9 +22,8 @@ class ToDoListTableViewController: UITableViewController, ToDoCellDelegate {
             toDos = ToDo.loadSampleToDos()
         }
     }
-    
-    
 
+    
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -44,14 +42,12 @@ class ToDoListTableViewController: UITableViewController, ToDoCellDelegate {
 
         return cell
     }
-    
 
     
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-    
 
     
     // Override to support editing the table view.
@@ -60,36 +56,13 @@ class ToDoListTableViewController: UITableViewController, ToDoCellDelegate {
             // Delete the row from the data source
             toDos.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            ToDo.saveToDos(toDos)
         }
     }
-    
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
     
      
     //MARK: - Navigation
     
-    /*
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     @IBSegueAction func editToDo(_ coder: NSCoder, sender: Any?) -> ToDoDetailTableViewController? {
         
@@ -119,7 +92,9 @@ class ToDoListTableViewController: UITableViewController, ToDoCellDelegate {
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
             }
         }
+        ToDo.saveToDos(toDos)
     }
+   
     
     //MARK: - Cell Delegate
     
@@ -129,6 +104,7 @@ class ToDoListTableViewController: UITableViewController, ToDoCellDelegate {
             toDo.isComplete.toggle()
             toDos[indexPath.row] = toDo
             tableView.reloadRows(at: [indexPath], with: .automatic)
+            ToDo.saveToDos(toDos)
         }
     }
 }
