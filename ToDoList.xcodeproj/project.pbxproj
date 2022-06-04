@@ -15,6 +15,7 @@
 		A5159E10284A2CC00028E9DB /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5159E0F284A2CC00028E9DB /* ToDo.swift */; };
 		A5371E77284A4749002823DF /* ToDoListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5371E76284A4749002823DF /* ToDoListTableViewController.swift */; };
 		A5371E79284A6E38002823DF /* ToDoDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5371E78284A6E38002823DF /* ToDoDetailTableViewController.swift */; };
+		A5371E7B284BCEFC002823DF /* ToDoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5371E7A284BCEFC002823DF /* ToDoCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		A5159E0F284A2CC00028E9DB /* ToDo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDo.swift; sourceTree = "<group>"; };
 		A5371E76284A4749002823DF /* ToDoListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListTableViewController.swift; sourceTree = "<group>"; };
 		A5371E78284A6E38002823DF /* ToDoDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDetailTableViewController.swift; sourceTree = "<group>"; };
+		A5371E7A284BCEFC002823DF /* ToDoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				A5159E01284A2A500028E9DB /* Main.storyboard */,
 				A5371E78284A6E38002823DF /* ToDoDetailTableViewController.swift */,
 				A5371E76284A4749002823DF /* ToDoListTableViewController.swift */,
+				A5371E7A284BCEFC002823DF /* ToDoCell.swift */,
 				A5159E04284A2A520028E9DB /* Assets.xcassets */,
 				A5159E06284A2A520028E9DB /* LaunchScreen.storyboard */,
 				A5159E09284A2A520028E9DB /* Info.plist */,
@@ -145,6 +148,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5159E10284A2CC00028E9DB /* ToDo.swift in Sources */,
+				A5371E7B284BCEFC002823DF /* ToDoCell.swift in Sources */,
 				A5371E79284A6E38002823DF /* ToDoDetailTableViewController.swift in Sources */,
 				A5159DFC284A2A500028E9DB /* AppDelegate.swift in Sources */,
 				A5159DFE284A2A500028E9DB /* SceneDelegate.swift in Sources */,
