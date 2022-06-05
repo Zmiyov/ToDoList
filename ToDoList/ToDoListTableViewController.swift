@@ -7,19 +7,59 @@
 
 import UIKit
 
-class ToDoListTableViewController: UITableViewController, ToDoCellDelegate {
+class ToDoListTableViewController: UITableViewController, ToDoCellDelegate, UISearchResultsUpdating {
+
+    
 
     var toDos = [ToDo]()
     
+    var searchController:UISearchController!
+    var searchResaults = [ToDo]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.leftBarButtonItem = editButtonItem
 
+        // Load a data
+        
         if let saveToDos = ToDo.loadToDos(){
             toDos = saveToDos
         } else {
             toDos = ToDo.loadSampleToDos()
+        }
+        
+        // Add search bar
+        searchController = UISearchController(searchResultsController: nil)
+        tableView.tableHeaderView = searchController.searchBar
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        
+        // Search bar options
+        searchController.searchBar.placeholder = "Search"
+        
+        // Search bar dissapears when tapped, hence the code line below is a MUST
+       // searchController.hidesNavigationBarDuringPresentation = false
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+    }
+    
+    // MARK: - Search bar logic
+    
+    func filterContentForSearchText(_ searchText: String) {
+        searchResaults = toDos.filter({ (toDo: ToDo) -> Bool in
+            let titleMatch = toDo.title.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
+            return titleMatch != nil}
+        )
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        if let searchText = searchController.searchBar.text {
+            filterContentForSearchText(searchText)
+            tableView.reloadData()
         }
     }
 
@@ -27,15 +67,19 @@ class ToDoListTableViewController: UITableViewController, ToDoCellDelegate {
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return toDos.count
+        
+        if searchController.isActive {
+            return searchResaults.count
+        } else {
+            return toDos.count
+        }
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoCellIdentifier", for: indexPath) as! ToDoCell
         
-        let toDo = toDos[indexPath.row]
+        let toDo = (searchController.isActive) ? searchResaults[indexPath.row] : toDos[indexPath.row]
         cell.titleLabel?.text = toDo.title
         cell.isCompleteButton.isSelected = toDo.isComplete
         cell.delegate = self
@@ -46,7 +90,11 @@ class ToDoListTableViewController: UITableViewController, ToDoCellDelegate {
     
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+        if searchController.isActive {
+            return false
+        } else {
+            return true
+        }
     }
 
     
