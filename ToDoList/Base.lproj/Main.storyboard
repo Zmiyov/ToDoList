@@ -91,6 +91,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="OeW-Fw-TY3">
+                            <rect key="frame" x="0.0" y="664" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1DS-oM-P5j">
+                                    <rect key="frame" x="10" y="12.5" width="40" height="19"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="1DS-oM-P5j" secondAttribute="height" multiplier="67:31" id="ayh-yh-ig1"/>
+                                        <constraint firstAttribute="width" constant="40" id="l9B-Py-tHR"/>
+                                    </constraints>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" image="arrowshape.turn.up.right" catalog="system"/>
+                                    <connections>
+                                        <action selector="shareButtonTapped:" destination="wCp-Xm-fD9" eventType="touchUpInside" id="Rl9-VK-W9L"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bVA-ld-Xn8">
+                                    <rect key="frame" x="364" y="2" width="40" height="40"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="6sF-zW-CJu"/>
+                                        <constraint firstAttribute="width" constant="40" id="9vk-96-UpL"/>
+                                        <constraint firstAttribute="width" secondItem="bVA-ld-Xn8" secondAttribute="height" id="hgH-H6-za6"/>
+                                    </constraints>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" image="mail" catalog="system"/>
+                                    <connections>
+                                        <action selector="mailButtonTapped:" destination="wCp-Xm-fD9" eventType="touchUpInside" id="6rh-Dd-Loq"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="bVA-ld-Xn8" firstAttribute="centerY" secondItem="OeW-Fw-TY3" secondAttribute="centerY" id="3ee-Z9-9CF"/>
+                                <constraint firstItem="1DS-oM-P5j" firstAttribute="centerY" secondItem="OeW-Fw-TY3" secondAttribute="centerY" id="7i3-fc-QkQ"/>
+                                <constraint firstAttribute="trailing" secondItem="bVA-ld-Xn8" secondAttribute="trailing" constant="10" id="C7u-CP-j3R"/>
+                                <constraint firstItem="1DS-oM-P5j" firstAttribute="leading" secondItem="OeW-Fw-TY3" secondAttribute="leading" constant="10" id="iD9-tV-BiU"/>
+                            </constraints>
+                        </view>
                         <sections>
                             <tableViewSection headerTitle="Basic Information" id="rQ5-mS-McK">
                                 <cells>
@@ -255,11 +293,16 @@
         <!--Navigation Controller-->
         <scene sceneID="JaZ-9b-vux">
             <objects>
-                <navigationController id="ibj-9z-Ebp" sceneMemberID="viewController">
+                <navigationController toolbarHidden="NO" id="ibj-9z-Ebp" sceneMemberID="viewController">
+                    <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="z8F-HS-bHJ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="DcU-oI-1Ht">
+                        <rect key="frame" x="0.0" y="759" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="wCp-Xm-fD9" kind="relationship" relationship="rootViewController" destinationCreationSelector="editToDo:sender:" id="Vo5-qZ-Pfo"/>
                     </connections>
@@ -289,8 +332,10 @@
         <segue reference="Fnj-mj-s1m"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="arrowshape.turn.up.right" catalog="system" width="128" height="106"/>
         <image name="checkmark.circle.fill" catalog="system" width="128" height="121"/>
         <image name="circle" catalog="system" width="128" height="121"/>
+        <image name="mail" catalog="system" width="128" height="93"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import MessageUI
 
-class ToDoDetailTableViewController: UITableViewController {
+class ToDoDetailTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
 
     @IBOutlet var titleTextField: UITextField!
     @IBOutlet var isCompleteButton: UIButton!
@@ -124,6 +125,51 @@ class ToDoDetailTableViewController: UITableViewController {
         } else {
             toDo = ToDo(title: title, isComplete: isComplete, dueDate: dueDate, notes: notes)
         }
+    }
+    
+    // MARK: - Share
+    
+    @IBAction func shareButtonTapped(_ sender: UIButton) {
+        
+        guard let toDo = toDo else { return }
+        let activityController = UIActivityViewController(activityItems: [toDo], applicationActivities: nil)
+        activityController.popoverPresentationController?.sourceView = sender
+        present(activityController, animated: true, completion: nil)
+    }
+    
+    @IBAction func mailButtonTapped(_ sender: UIButton) {
+        
+        guard MFMailComposeViewController.canSendMail() else { return }
+        
+        let mailComposer = MFMailComposeViewController()
+        mailComposer.mailComposeDelegate = self
+        mailComposer.setToRecipients(["example@example.com"])
+        mailComposer.setSubject("Look at this")
+        mailComposer.setMessageBody("This is text from my app", isHTML: false)
+        
+        guard let toDo = toDo else {return}
+
+        let details = "I need \(toDo.title), is this complete: \(toDo.isComplete), date: \(toDo.dueDate.formatted(date: .abbreviated, time: .shortened)), notes: \(toDo.notes ?? "")."
+        let attachmentData = Data(details.utf8)
+        mailComposer.addAttachmentData(attachmentData, mimeType: ".txt", fileName: "Details")
+        
+        present(mailComposer, animated: true, completion: nil)
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        //        switch result {
+        //        case .cancelled:
+        //            print("User cancelled")
+        //        case .saved:
+        //            print("Mail is saved by user")
+        //        case .sent:
+        //            print("Mail is send succesfully")
+        //        case .failed:
+        //            print("Sending mail is failed")
+        //        default:
+        //            break
+        //        }
+        dismiss(animated: true, completion: nil)
     }
     
 }

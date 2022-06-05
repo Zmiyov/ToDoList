@@ -9,11 +9,10 @@ import UIKit
 
 class ToDoListTableViewController: UITableViewController, ToDoCellDelegate, UISearchResultsUpdating {
 
-    
 
     var toDos = [ToDo]()
     
-    var searchController:UISearchController!
+    var searchController: UISearchController!
     var searchResaults = [ToDo]()
     
     override func viewDidLoad() {
@@ -39,6 +38,8 @@ class ToDoListTableViewController: UITableViewController, ToDoCellDelegate, UISe
         
         // Search bar dissapears when tapped, hence the code line below is a MUST
        // searchController.hidesNavigationBarDuringPresentation = false
+        
+        
         
     }
     
